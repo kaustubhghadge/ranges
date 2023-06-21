@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Range Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    input {
+      margin-bottom: 10px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    #result {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Range Calculator</h1>
+
+  <label for="first-number">Enter the first number:</label>
+  <input type="number" id="first-number" required>
+
+  <label for="second-number">Enter the second number:</label>
+  <input type="number" id="second-number" required>
+
+  <label for="value-n">Enter the value of 'n':</label>
+  <input type="number" id="value-n" required>
+
+  <button onclick="calculateRanges()">Calculate</button>
+
+  <div id="result"></div>
+
+  <script>
+    function calculateRanges() {
+      // Get input values
+      const firstNumber = parseFloat(document.getElementById('first-number').value);
+      const secondNumber = parseFloat(document.getElementById('second-number').value);
+      const n = parseInt(document.getElementById('value-n').value);
+
+      // Determine the largest and smallest numbers
+      let x, y;
+      if (firstNumber > secondNumber) {
+        x = firstNumber;
+        y = secondNumber;
+      } else {
+        x = secondNumber;
+        y = firstNumber;
+      }
+
+      // Calculate the standard deviation
+      const SD = x - y;
+
+      // Generate the ascending order range
+      const ascendingRange = [];
+      for (let i = 1; i <= n; i++) {
+        const r = i * SD + n;
+        ascendingRange.push(r);
+      }
+
+      // Generate the descending order range
+      const descendingRange = [];
+      for (let i = n; i >= 1; i--) {
+        const r = i * SD - n;
+        descendingRange.push(r);
+      }
+
+      // Display the resulting ranges
+      const resultElement = document.getElementById('result');
+      resultElement.innerHTML = `
+        <p>Ascending Order Range: ${ascendingRange.join(', ')}</p>
+        <p>Descending Order Range: ${descendingRange.join(', ')}</p>
+      `;
+    }
+  </script>
+</body>
+</html>

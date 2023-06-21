@@ -9,6 +9,10 @@
       padding: 20px;
     }
 
+    h1 {
+      margin-bottom: 20px;
+    }
+
     label {
       font-weight: bold;
     }
@@ -25,9 +29,24 @@
       cursor: pointer;
     }
 
-    #result {
+    #result-table {
       margin-top: 20px;
-      font-weight: bold;
+    }
+
+    #result-table table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    #result-table th, #result-table td {
+      padding: 8px;
+      border-bottom: 1px solid #ddd;
+      text-align: center;
+    }
+
+    #result-table th {
+      background-color: #4CAF50;
+      color: white;
     }
   </style>
 </head>
@@ -45,7 +64,7 @@
 
   <button onclick="calculateRanges()">Calculate</button>
 
-  <div id="result"></div>
+  <div id="result-table"></div>
 
   <script>
     function calculateRanges() {
@@ -81,12 +100,23 @@
         descendingRange.push(r);
       }
 
-      // Display the resulting ranges
-      const resultElement = document.getElementById('result');
-      resultElement.innerHTML = `
-        <p>Ascending Order Range: ${ascendingRange.join(', ')}</p>
-        <p>Descending Order Range: ${descendingRange.join(', ')}</p>
+      // Generate the table HTML for the resulting ranges
+      const tableHTML = `
+        <table>
+          <tr>
+            <th>Ascending Order Range</th>
+            <th>Descending Order Range</th>
+          </tr>
+          <tr>
+            <td>${ascendingRange.join(', ')}</td>
+            <td>${descendingRange.join(', ')}</td>
+          </tr>
+        </table>
       `;
+
+      // Display the resulting ranges in a table
+      const resultTableElement = document.getElementById('result-table');
+      resultTableElement.innerHTML = tableHTML;
     }
   </script>
 </body>
